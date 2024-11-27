@@ -1,10 +1,18 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from './auth/AuthProvider';
 
 export function Navigation() {
   const { user, logout } = useAuth();
   const location = useLocation();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Failed to sign out:', error);
+      alert('Failed to sign out. Please try again.');
+    }
+  };
 
   return (
     <nav className="bg-white shadow-lg">
@@ -45,7 +53,7 @@ export function Navigation() {
               <>
                 <span className="text-[#4C4C4D] text-sm hidden sm:block">{user.email}</span>
                 <button
-                  onClick={logout}
+                  onClick={handleLogout}
                   className="px-4 py-2 text-[#050505] hover:bg-[#BABBF3] hover:bg-opacity-20 
                             rounded-lg transition-all"
                 >

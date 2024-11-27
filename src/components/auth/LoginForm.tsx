@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,6 +22,7 @@ export function LoginForm() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
+      setLoading(true);
       const { error: authError } = await supabase.auth.signInWithPassword(data);
       
       if (authError) throw authError;
@@ -37,6 +37,8 @@ export function LoginForm() {
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to sign in');
+    } finally {
+      setLoading(false);
     }
   };
   

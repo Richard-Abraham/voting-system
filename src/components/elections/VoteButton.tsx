@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { castVote } from '../../lib/api/elections';
 import { useAuth } from '../../components/auth/AuthProvider';

@@ -1,14 +1,11 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useAuth } from '../auth/AuthProvider';
 import { ElectionCalendar } from '../elections/ElectionCalendar';
 import { NotificationsPanel } from '../dashboard/NotificationsPanel';
 import { getElections } from '../../lib/api/elections';
 
 export function Dashboard() {
-  const { user } = useAuth();
-    const { data: activeElections } = useQuery({
+  useQuery({
     queryKey: ['activeElections'],
     queryFn: getElections
   });
